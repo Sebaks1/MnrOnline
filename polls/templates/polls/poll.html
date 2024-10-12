@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <style>
+    .poll-list {
+      margin-top: 20px;
+    }
+    .poll-list li {
+      padding: 10px;
+    }
+    .poll-list a {
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: #007bff;
+    }
+    .poll-list a:hover {
+      text-decoration: underline;
+    }
+    .no-polls {
+      font-size: 1.2rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="poll-list mt-5">
+      <!-- Check if there are any questions in the latest_question_list -->
+      {% if latest_question_list %}
+      <ul class="list-group">
+        <!-- Loop through each question in the latest_question_list -->
+        {% for question in latest_question_list %}
+        <li class="list-group-item">
+          <!-- Create a link to the detail view for each question using its ID -->
+          <a href="{% url 'polls:detail' question.id %}">
+            <!-- Display the question text as the link content -->
+            {{ question.question_text }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      <!-- If there are no questions available, display a message instead -->
+      {% else %}
+      <p class="no-polls">No polls are available.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <style>
+    .question-heading {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .error-message {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .choice-label {
+      font-size: 1.2rem;
+    }
+    .vote-form {
+      margin-top: 20px;
+    }
+    .submit-btn {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <!-- Display the question text inside an <h1> heading -->
+    <h1 class="question-heading">{{ question.question_text }}</h1>
+
+    <!-- If there is an error message (e.g., when no choice is selected), display it inside a paragraph with bold text -->
+    {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+    <!-- Begin the form for submitting the user's vote -->
+    <form action="{% url 'polls:vote' question.id %}" method="post" class="vote-form">
+      <!-- CSRF token for securing the form submission -->
+      {% csrf_token %}
+
+      <!-- Loop through all the choices associated with the question -->
+      <div class="form-group">
+        {% for choice in question.choice_set.all %}
+        <div class="form-check">
+          <!-- Radio button for each choice, with a unique ID based on the loop counter -->
+          <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+          <!-- Label for the radio button, associated with the ID, displaying the choice text -->
+          <label class="form-check-label choice-label" for="choice{{ forloop.counter }}">
+            {{ choice.choice_text }}
+          </label>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Submit button to cast the vote -->
+      <button type="submit" class="btn btn-primary submit-btn">Vote</button>
+    </form>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
