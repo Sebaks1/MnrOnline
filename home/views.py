@@ -15,7 +15,7 @@ def home(request):
         HttpResponse: The rendered home page.
     """
     # Render the home page template 'band/home.html'.
-    return render(request, 'band/home.html')
+    return render(request, 'home/home.html')
 
 
 def about(request):
@@ -29,38 +29,13 @@ def about(request):
         HttpResponse: The rendered about page.
     """
     # Render the about page template 'band/about.html'.
-    return render(request, 'band/about.html')
+    return render(request, 'home/about.html')
 
+from django.shortcuts import render
 
-def contact(request):
-    """
-    View function for the contact page.
+def login_view(request):
+    return render(request, 'home/login.html')
 
-    Args:
-        request (HttpRequest): The request object.
-
-    Returns:
-        HttpResponse: The rendered contact page.
-    """
-    # Render the contact page template 'band/contact.html'.
-    return render(request, 'band/contact.html')
-
-
-def news(request):
-    """
-    View function for the news page.
-
-    Args:
-        request (HttpRequest): The request object.
-
-    Returns:
-        HttpResponse: The rendered news page with a list of news articles.
-    """
-    # Retrieve all news articles, ordered by date_posted in descending order.
-    articles = News.objects.all().order_by('-date_posted')
-    
-    # Render the news page template 'band/news.html', passing the articles context.
-    return render(request, 'band/news.html', {'articles': articles})
 
 
 def signup(request):
@@ -91,4 +66,4 @@ def signup(request):
         form = UserCreationForm()
     
     # Render the signup page template 'band/signup.html', passing the form context.
-    return render(request, 'band/signup.html', {'form': form})
+    return render(request, 'home/signup.html', {'form': form})
