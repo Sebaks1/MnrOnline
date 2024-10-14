@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Music Band</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Main container with top margin for spacing -->
+    <div class="container mt-5">
+        <!-- Page heading -->
+        <h1 class="text-center mb-4">Sign Up</h1>
+        <!-- Sign Up form -->
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <!-- Render form fields as paragraphs for better spacing -->
+            {{ form.as_p }}
+            <!-- Submit button with Bootstrap styling -->
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+        <!-- Link to return to home page -->
+        <div class="text-center mt-3">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

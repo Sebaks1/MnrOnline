@@ -1,0 +1,28 @@
+<!-- band/templates/band/login.html -->
+{% extends 'band/base.html' %}
+
+{% block title %}Login - Music Band{% endblock %}
+
+{% block content %}
+    <!-- Main container with top margin for spacing -->
+    <div class="container mt-5">
+        <!-- Centering the form using Bootstrap grid system -->
+        <div class="row justify-content-center">
+            <!-- Column for the form, with responsive width on medium screens -->
+            <div class="col-md-4">
+                <!-- Form heading -->
+                <h2 class="text-center mb-4">Login</h2>
+                <!-- Login form -->
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <!-- Render form fields as paragraphs for better spacing -->
+                    {{ form.as_p }}
+                    <!-- Hidden input to redirect user after login -->
+                    <input type="hidden" name="next" value="{% url 'home' %}">
+                    <!-- Submit button with Bootstrap styling -->
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
